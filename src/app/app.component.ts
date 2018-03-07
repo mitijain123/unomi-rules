@@ -9,12 +9,13 @@ import 'rxjs/add/operator/map'
 })
 export class AppComponent {
   title = 'app';
-
+  headers: any;
   constructor(private http: HttpClient) {
-  	let header = new HttpHeaders();
-    header.append('Authorization',"Basic " + btoa("karaf:karaf") );
-
-  	this.http.get('https://localhost:9443/cxs/rules', { headers: header }).subscribe(data => {
+  	this.headers = new HttpHeaders()
+    	.set("Authorization", "Basic " + btoa("karaf:karaf") );
+    console.log(this.headers);
+    console.log(this.http);
+  	this.http.get('https://localhost:9443/cxs/rules', { headers: this.headers }).subscribe(data => {
       console.log(data);
     });
 	    	
